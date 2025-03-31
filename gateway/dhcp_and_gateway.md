@@ -6,6 +6,11 @@ Run dnsmasq in a separate terminal:
 sudo dnsmasq --conf-file=dnsmasq.conf --no-daemon
 ```
 
+Several instances of `dnsmasq` can run if they bind the address of individal interfaces:
+
+- `bind-interfaces` to staticaly bind **existing** interfaces. It continues to listen to the same addresses even when interfaces come and go and change address. Interfaces and addresses must exist.
+- `bind-dynamic` to dynamicaly bind interfaces and automatically listen new ones. If new interfaces or addresses appeared, it automatically listens on those. Interfaces and addresses may not exist.
+
 ## NAT and port forwarding
 
 Forward the traffic to the gateway:
