@@ -1,6 +1,18 @@
 # Playing audio (local)
 
-## Installing the audio server (PulseAudio)
+## Installation
+
+### Using ALSA only
+
+Install `alsa-utils`:
+
+```bash
+apt install alsa-utils
+```
+
+That's it!
+
+### Using an audio server (PulseAudio)
 
 Sources:
 
@@ -40,8 +52,7 @@ LANG=C pactl info | grep '^Server Name'
 Server Name: PulseAudio (on PipeWire 1.2.7)
 ```
 
-## Installing the ALSA plugin
-
+### Using the pipewire ALSA plugin
 
 Install the ALSA plugin for PipeWire (`trx` uses ALSA):
 
@@ -66,6 +77,14 @@ sysdefault:CARD=vc4hdmi
 ```
 
 ## Playing audio
+
+### Raw files
+
+Play raw audio file using `aplay`:
+
+```bash
+aplay -vv --device=hw:Headphones Blues_pour_le_chat_48000.wav 
+```
 
 ### mpg123
 
