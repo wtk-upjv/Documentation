@@ -11,13 +11,22 @@ sudo apt install trx
 
 ## Info
 
-`trx`:
+`trx` package:
 
 - Uses the opus codec and supports only 48000Hz sample rate.
-- Listens one stream at a time (from one device).
-- If the stream ends, it will listen to the next (from another device).
+- Listens one stream at a time (from one device)
+- If the stream ends, it will listen to the next available (e.g. from another device).
 
-> TODO: 
+- The RTP protocol (used by `trx`) controls the stream inside a single session:
+
+  <https://en.wikipedia.org/wiki/Real-time_Transport_Protocol>  
+  <https://datatracker.ietf.org/doc/html/rfc4571>
+
+  - It keeps track of the packets order using the **Sequence Number**.
+  - It plays audio at proper time with the **Timestamp**.
+  - It uniquely identifies the source of a stream using the **Synchronization Source Identifier** (SSRC).
+
+> TODO: Create a separate documentation if the paragraph gets bigger
 
 ## Debug
 
