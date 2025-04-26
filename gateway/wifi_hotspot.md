@@ -41,19 +41,22 @@ WIFI_IFACE=""
 NEW_MACADDR=""
 
 # Create virtual device
-iw dev wlan0 interface add ${WIFI_IFACE} type __ap
+iw dev wlan0 interface add "${WIFI_IFACE}" type __ap
 
 # Set managed off in NetworkManager
-nmcli device set ${WIFI_IFACE} managed off
+nmcli device set "${WIFI_IFACE}" managed off
+
+# Be sure the device is of type AP
+iw dev "${WIFI_IFACE}" set type __ap
 
 # Set new MAC address 
-ip link set dev ${WIFI_IFACE} address ${NEW_MACADDR}
+ip link set dev "${WIFI_IFACE}" address "${NEW_MACADDR}"
 
 # Set the IPv4 address
-ip link set down dev ${WIFI_IFACE}
-ip addr flush wtk_ap
-ip link set up dev wtk_ap
-ip addr add 192.168.5.1/24 dev wtk_ap
+ip link set down dev "${WIFI_IFACE}"
+ip addr flush "${WIFI_IFACE}"
+ip link set up dev "${WIFI_IFACE}"
+ip addr add 192.168.5.1/24 dev "${WIFI_IFACE}"
 ```
 
 In `hostapd.conf`, the channel must be the same than the Internet device!
