@@ -28,10 +28,15 @@ fi
 if [ "${out_interface}" ]; then
     echo "NAT begin"
 
-    sudo nft add table nat
-    sudo nft 'add chain nat postrouting { type nat hook postrouting priority 100 ; }'
-    sudo nft add rule nat postrouting ip saddr "${gateway_address}" oif "${out_interface}"
-    sudo nft add rule nat postrouting masquerade
+    # Delete the previous table if it exists
+    sudo nft delete table wtk-nat 2>/dev/null && echo "NAT delete table" || true
+
+    # Create the nat table
+    echo "NAT create table"
+    sudo nft add table wtk-nat
+    sudo nft 'add chain wtk-nat postrouting { type nat hook postrouting priority 100 ; }'
+    sudo nft add rule wtk-nat postrouting masquerade
+    sudo nft add rule wtk-nat postrouting ip saddr "${gateway_address}" oif "${out_interface}"
 
     # TODO: There are missing rules for using iptables alternative
     # sudo iptables -t nat -A POSTROUTING -o "${out_interface}" -j MASQUERADE

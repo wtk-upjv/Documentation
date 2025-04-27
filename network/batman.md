@@ -89,6 +89,9 @@ ip link set up dev bat0
 ```bash
 # Add the ethernet device to batman
 batctl if add eth0
+
+# Bring the batman interface up
+ip link set up dev bat0
 ```
 
 ## IPv4LL

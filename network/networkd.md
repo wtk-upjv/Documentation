@@ -7,7 +7,7 @@ Sources:
 - Debian official manual network setup: <https://www.debian.org/doc/manuals/debian-reference/ch05.en.html>
 - Debian wiki systemd-networkd: <https://wiki.debian.org/SystemdNetworkd>
 
-Netword manuals:
+Networkd manuals:
 
 - Batman interface <https://www.freedesktop.org/software/systemd/man/latest/systemd.netdev.html#[BatmanAdvanced]%20Section%20Options>
 - Batman network <https://www.freedesktop.org/software/systemd/man/latest/systemd.network.html#BatmanAdvanced=>
