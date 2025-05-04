@@ -15,6 +15,23 @@ Save it in the file `/etc/modules-load.d/wtk.conf`, or run the command:
 modeprobe batman-adv
 ```
 
+## Routing algorithms
+
+- BATMAN_IV <https://www.open-mesh.org/projects/batman-adv/wiki/BATMAN_IV>
+- BATMAN_V <https://www.open-mesh.org/projects/batman-adv/wiki/BATMAN_V>
+- *OpenWrt* routing discussion <https://forum.openwrt.org/t/batman-v-routing-on-prem-connectivity-loss-seen/20432>
+- *OpenWrt* batman-adv options <https://openwrt.org/docs/guide-user/network/wifi/mesh/batman#batman-adv_options_for_bat0_the_main_mesh_interface>
+
+Set the default routing algorithm prior to create the `bat0` interface (default `BATMAN_IV`):
+
+```bash
+# Get the current routing algo
+batctl routing_algo
+
+# Use BATMAN_V
+batctl routing_algo BATMAN_V
+```
+
 ## Wireless setup
 
 - B.A.T.M.A.N. advanced quick start guide: <https://www.open-mesh.org/projects/batman-adv/wiki/Quick-start-guide>
