@@ -47,7 +47,7 @@ options snd slots=snd-usb-audio
 
 ```bash
 # Record
-arecord --format=dat --device="default:CARD=Spitfire,DEV=0" --duration 5 /tmp/test-mic.wav
+arecord --format=dat --device="default:CARD=Device" --duration 5 /tmp/test-mic.wav
 
 # Play
 aplay --device="default:CARD=Device" /tmp/test-mic.wav
