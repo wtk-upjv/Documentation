@@ -15,10 +15,17 @@ gateway_address="192.168.5.1/24"
 if [ "${lan_interface}" ]; then
     echo "Gateway begin"
 
+    # Delete the gateway address from any interface
+    ip -brief address |
+        grep "${gateway_address}" |
+        cut -d " " -f 1 |
+        xargs -I {} sudo ip addr del "${gateway_address}" dev {}
+
+    # Configure the new lan interface
     sudo ip link set "${lan_interface}" down
     sudo ip addr flush dev "${lan_interface}"
-    sudo ip link set "${lan_interface}" up
     sudo ip addr add "${gateway_address}" dev "${lan_interface}"
+    sudo ip link set "${lan_interface}" up
 
     echo "Gateway end"
 else
