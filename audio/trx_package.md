@@ -114,7 +114,7 @@ sudo -E trx-rx -h fe80::1c26:a3ff:fe81:970e%bat0
 
 `trx-rx` (lib oRTP) can listen to an IPv6 multicast address but it **can't subscribe to an IPv6 multicast group**:
 
-- We must join the multicast group with another program to receive incoming packets: [trx multicast](./trx_ipv6_multicast.md)
+- We must join the multicast group with another program to receive incoming packets: [trx multicast](./trx_multicast.md)
 
 ```bash
 # IPv6 multicast (after joining the multicast group)
