@@ -1,6 +1,6 @@
 ## Installation
 
-<http://www.pogo.org.uk/~mark/trx/>  
+<http://www.pogo.org.uk/~mark/trx/>
 <https://www.pogo.org.uk/~mark/trx/streaming-desktop-audio.html>
 
 Install the `trx` package:
@@ -19,7 +19,7 @@ sudo apt install trx
 
 - The RTP protocol (used by `trx`) controls the stream inside a single session:
 
-  <https://en.wikipedia.org/wiki/Real-time_Transport_Protocol>  
+  <https://en.wikipedia.org/wiki/Real-time_Transport_Protocol>
   <https://datatracker.ietf.org/doc/html/rfc4571>
 
   - It keeps track of the packets order using the **Sequence Number**.
@@ -86,7 +86,14 @@ Stream audio from the loopback using `trx-tx`:
 - `-h 239.0.0.1` to stream to multicast address
 
 ```bash
+# IPv4 Multicast
 sudo -E trx-tx -d wtkcap -h 239.0.0.1
+
+# IPv6 Unicast
+sudo -E trx-tx -d wtkcap -h fe80::1c26:a3ff:fe81:970e%bat0
+
+# IPv6 multicast
+sudo -E trx-rx -h ff12::1234%bat0
 ```
 
 ### Receiver
@@ -96,5 +103,20 @@ Play audio to the default device using `trx-rx`:
 - `-m 32` to add extra buffer time (default 16ms)
 
 ```bash
-sudo -E trx-rx  -m 32 -h 239.0.0.1
+# IPv4 multicast
+sudo -E trx-rx -m 32 -h 239.0.0.1
+
+# IPv6 unicast
+sudo -E trx-rx -h fe80::1c26:a3ff:fe81:970e%bat0
+```
+
+> WARNING: `trx-rx` don't support IPv6 multicast address by default
+
+`trx-rx` (lib oRTP) can listen to an IPv6 multicast address but it **can't subscribe to an IPv6 multicast group**:
+
+- We must join the multicast group with another program to receive incoming packets: [trx multicast](./trx_ipv6_multicast.md)
+
+```bash
+# IPv6 multicast (after joining the multicast group)
+sudo -E trx-rx -h ff12::1234%bat0
 ```
