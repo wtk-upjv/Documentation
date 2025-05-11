@@ -1,3 +1,5 @@
+# Join multicast group
+
 ## IPv6 multicast
 
 IPv6 multicast requires to subscribe explicitly to the multicast group:
@@ -36,7 +38,7 @@ Look at the manual and headers for information:
 `ipv6_mreq` structure:
 
 ```c
-// In the file /usr/src/kernel-headers-6.12.25_1/include/uapi/linux/in6.h
+/* /usr/src/kernel-headers-6.12.25_1/include/uapi/linux/in6.h */
 struct ipv6_mreq {
         /* IPv6 multicast address of group */
         struct in6_addr ipv6mr_multiaddr;
