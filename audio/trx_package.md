@@ -96,7 +96,7 @@ sudo -E trx-tx -d wtkcap -h fe80::1c26:a3ff:fe81:970e%bat0
 sudo -E trx-rx -h ff12::1234%bat0
 ```
 
-### Receiver
+### One receiver
 
 Play audio to the default device using `trx-rx`:
 
@@ -108,9 +108,14 @@ sudo -E trx-rx -m 32 -h 239.0.0.1
 
 # IPv6 unicast
 sudo -E trx-rx -h fe80::1c26:a3ff:fe81:970e%bat0
+
+# IPv6 multicast (after joining the multicast group)
+sudo -E trx-rx -h ff12::1234%bat0
 ```
 
-> WARNING: `trx-rx` don't support IPv6 multicast address by default
+> WARNING: `trx-rx` IPv6 multicast are received to the local interface (not `bat0`): [../multicast/routing.md](../multicast/routing.md)
+
+> WARNING: `trx-rx` behavior for multicast depends on the libortp version: [./libortp](./libortp.md)
 
 `trx-rx` (lib oRTP) can listen to an IPv6 multicast address but it **can't subscribe to an IPv6 multicast group**:
 
