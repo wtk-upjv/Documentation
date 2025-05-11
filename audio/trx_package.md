@@ -117,11 +117,17 @@ sudo -E trx-rx -h ff12::1234%bat0
 
 > WARNING: `trx-rx` behavior for multicast depends on the libortp version: [./libortp](./libortp.md)
 
-`trx-rx` (lib oRTP) can listen to an IPv6 multicast address but it **can't subscribe to an IPv6 multicast group**:
+### Multiple receivers
 
-- We must join the multicast group with another program to receive incoming packets: [trx multicast](./trx_multicast.md)
+> WARNING: Only on Debian 12 (`libortp` version 5.1.64)
+
+Receive and play two RTP streams at the same time:
 
 ```bash
-# IPv6 multicast (after joining the multicast group)
-sudo -E trx-rx -h ff12::1234%bat0
+sudo -E trx-rx -h 239.0.0.1
 ```
+```bash
+sudo -E trx-rx -h 239.0.0.2
+```
+
+Also work with IPv6.
