@@ -49,6 +49,13 @@ Name=bat0
 LinkLocalAddressing=yes
 # Use DHCP to access internet (development mode)
 DHCP=ipv4
+
+[Route]
+# Add a multicast route with a low metric value so bat0 is the default
+Destination=ff00::/8
+Metric=100
+Table=local
+Type=multicast
 ```
 
 `/etc/systemd/network/10-bat0-interfaces.network` (could be split in two for each interface):
