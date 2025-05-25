@@ -44,6 +44,10 @@ RoutingAlgorithm=batman-v
 # Apply this configuration to the bat0 device
 Name=bat0
 
+[Link]
+# Decreate the MTU of bat0 to include the batman header
+MTUBytes=1468
+
 [Network]
 # Link-local autoconfiguration (ipv4 and ipv6)
 LinkLocalAddressing=yes
@@ -73,7 +77,8 @@ LinkLocalAddressing=no
 
 # Increase the MTU because batman-adv uses slightly larger packets than normal
 # Not supported on the Raspberry PI 3 for both interfaces
-# MTUBytes=1560
+# Decrease the MTU of the bat0 network instead
+#MTUBytes=1532
 
 [Network]
 # Assign to bat0
