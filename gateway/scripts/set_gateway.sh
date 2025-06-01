@@ -36,18 +36,19 @@ if [ "${out_interface}" ]; then
     echo "NAT begin"
 
     # Delete the previous table if it exists
-    sudo nft delete table wtk-nat 2>/dev/null && echo "NAT delete table" || true
+    if sudo nft delete table wtk-nat 2>/dev/null; then
+        echo "NAT delete table"
+    fi
 
     # Create the nat table
     echo "NAT create table"
     sudo nft add table wtk-nat
-    sudo nft 'add chain wtk-nat postrouting { type nat hook postrouting priority 100 ; }'
-    sudo nft add rule wtk-nat postrouting masquerade
-    sudo nft add rule wtk-nat postrouting ip saddr "${gateway_address}" oif "${out_interface}"
 
-    # TODO: There are missing rules for using iptables alternative
-    # sudo iptables -t nat -A POSTROUTING -o "${out_interface}" -j MASQUERADE
- 
+    # FIXME: No NAT when using docker at the same time (voidlinux)
+    # TODO: Add a "greater" priority than the other system services?
+    sudo nft 'add chain wtk-nat postrouting { type nat hook postrouting priority 100 ; }'
+    sudo nft add rule wtk-nat postrouting ip saddr "${gateway_address}" oifname "${out_interface}" masquerade
+
     sudo sysctl --write net.ipv4.ip_forward=1
 
     echo "NAT end"

@@ -3,6 +3,14 @@
 set -e
 set -u
 
+trap "cleanup" EXIT
+
+cleanup() {
+    echo ""
+    echo "cleanup: destroy batctl interface"
+    sudo batctl interface destroy || true
+}
+
 [ $# -ne 2 ] && echo "usage: $0 lan_interface out_interface" >&2 && exit 1
 
 lan_interface="${1}"
