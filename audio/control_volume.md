@@ -1,4 +1,4 @@
-Adavar has written:
+Author: @malojeu
 
 ## Increase / decrease volume
 
