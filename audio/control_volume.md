@@ -46,32 +46,3 @@ done
 stty sane
 echo "Exited."
 ```
-
-## Systemd service integration
-
-Disable `tty1`:
-
-```bash
-sudo systemctl disable getty@tty1.service
-sudo systemctl stop getty@tty1.service
-```
-
-```ini
-[Unit]
-Description=Volume control script on tty1
-After=multi-user.target
-
-[Service]
-ExecStart=/home/isri/test.sh
-StandardInput=tty
-StandardOutput=tty
-TTYPath=/dev/tty1
-TTYReset=yes
-TTYVHangup=yes
-TTYVTDisallocate=yes
-Restart=always
-User=isri
-
-[Install]
-WantedBy=multi-user.target
-```
